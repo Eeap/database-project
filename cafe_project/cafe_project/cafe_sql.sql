@@ -1,5 +1,5 @@
 
-#ë©”ë‰´ í…Œì´ë¸”
+#ë©”ë‰´ ?…Œ?´ë¸?
 create table menu(
   menu_name varchar(18) not null,
   price int(4) not null,
@@ -9,7 +9,7 @@ create table menu(
   constraint price_ck check (price >= 0 ),
   constraint m_count_ck check (m_count >= 0 ),
   PRIMARY KEY(menu_name));
-#ë©”ë‰´ ì¶”ê°€
+#ë©”ë‰´ ì¶”ê?
 insert into menu values('espresso',2500,'coffee',10);
 insert into menu values('americano',3000,'coffee',10);
 insert into menu values('cappuccino',4000,'coffee',10);
@@ -29,7 +29,7 @@ insert into menu values('honey bread',4500,'dessert',10);
 insert into menu values('cookie',3000,'dessert',10);
 insert into menu values('cake',3000,'dessert',10);
 
-#ì†ë‹˜ í…Œì´ë¸”
+#?†?‹˜ ?…Œ?´ë¸?
 create table guests(
 	phoneNum char(11) unique,
 	g_name varchar(16) not null,
@@ -38,30 +38,30 @@ create table guests(
 	constraint sign_ck check (sign_up in ('Y','N')),
 	primary key(phoneNum));
 
-#ê´€ë¦¬ìž í…Œì´ë¸”
+#ê´?ë¦¬ìž ?…Œ?´ë¸?
 create table manager(
 	m_name varchar(16) not null,
     pswd varchar(10) not null,
     primary key(m_name));
 
-#ì£¼ë¬¸ ê²°ì œ í…Œì´ë¸”
+#ì£¼ë¬¸ ê²°ì œ ?…Œ?´ë¸?
 create table order_payment(
   phoneNum char(11) unique,
-  o_date datetime not null,
+  o_date date not null,
   o_no int(10) not null,
   payment int(8) check (payment >= 0),
   constraint pk_orderPayment primary key(phoneNum,o_date,o_no));
 
-#ì£¼ë¬¸ ë©”ë‰´ í…Œì´ë¸”
+#ì£¼ë¬¸ ë©”ë‰´ ?…Œ?´ë¸?
 create table order_menu(
   o_no int(10) not null,
   menu_name varchar(18) not null,
-  o_count tinyint(2) default 1,
+  o_count int(2) default 1,
   constraint pk_orderMoney primary key(o_no,menu_name));
 
-#ì •ì‚° í…Œì´ë¸”
+#? •?‚° ?…Œ?´ë¸?
 create table calculation(
-	rev_date datetime not null,
+	rev_date date not null,
     revenue int(16) default 0 check (revenue >= 0) not null,
     primary key(rev_date));
 	

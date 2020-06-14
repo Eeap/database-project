@@ -36,7 +36,7 @@ int main() {
 	int stat = mysql_query(Connptr, Query);
 	if (stat != 0) {
 		fprintf(stderr, "mysql query error: %s\n", mysql_error(&Conn));
-		exit(0);
+		exit(100);
 	}
 	Result = mysql_store_result(Connptr);
 	while ((Row = mysql_fetch_row(Result)) != NULL) {
@@ -47,7 +47,7 @@ int main() {
 		stat = mysql_query(Connptr, Query);
 		if (stat != 0) {
 			fprintf(stderr, "mysql query error: %s\n", mysql_error(&Conn));
-			exit(0);
+			exit(100);
 		}
 	}
 	//시작
@@ -57,7 +57,7 @@ int main() {
 		stat = mysql_query(Connptr, Query);
 		if (stat != 0) {
 			fprintf(stderr, "mysql query error: %s\n", mysql_error(&Conn));
-			exit(0);
+			exit(100);
 		}
 		Result = mysql_store_result(Connptr);
 		while ((Row = mysql_fetch_row(Result)) != NULL) {
@@ -105,7 +105,7 @@ void menu(MYSQL* Connptr, MYSQL &Conn, MYSQL_RES* Result) {
 	int stat = mysql_query(Connptr, Query);
 	if (stat != 0) {
 		fprintf(stderr, "mysql query error: %s\n", mysql_error(&Conn));
-		exit(0);
+		exit(100);
 	}
 	Result = mysql_store_result(Connptr);
 	while ((Row = mysql_fetch_row(Result)) != NULL) {
@@ -121,7 +121,7 @@ bool menu_count_ck(MYSQL* Connptr, MYSQL &Conn, MYSQL_RES* Result,string item,in
 	int stat = mysql_query(Connptr, query.c_str());
 	if (stat != 0) {
 		fprintf(stderr, "mysql query error: %s\n", mysql_error(&Conn));
-		exit(0);
+		exit(100);
 	}
 	Result = mysql_store_result(Connptr);
 	Row = mysql_fetch_row(Result);
@@ -141,14 +141,14 @@ void order_menu(MYSQL* Connptr, MYSQL &Conn, MYSQL_RES* Result, vector<string>& 
 		int stat = mysql_query(Connptr, query.c_str());
 		if (stat != 0) {
 			fprintf(stderr, "mysql query error: %s\n", mysql_error(&Conn));
-			exit(0);
+			exit(100);
 		}
 		//menu에서 하나씩 빼기
 		query = "update menu set m_count=m_count - "+ to_string(order_count[idx]) +" where menu_name = '" + order[idx] + "'";
 		stat = mysql_query(Connptr, query.c_str());
 		if (stat != 0) {
 			fprintf(stderr, "mysql query error: %s\n", mysql_error(&Conn));
-			exit(0);
+			exit(100);
 		}
 	}
 
@@ -161,7 +161,7 @@ int order_payment(MYSQL* Connptr, MYSQL &Conn, MYSQL_RES* Result, string& phone)
 	int stat = mysql_query(Connptr, query.c_str());
 	if (stat != 0) {
 		fprintf(stderr, "mysql query error: %s\n", mysql_error(&Conn));
-		exit(0);
+		exit(100);
 	}
 	int sum = 0;
 	Result = mysql_store_result(Connptr);
@@ -174,7 +174,7 @@ int order_payment(MYSQL* Connptr, MYSQL &Conn, MYSQL_RES* Result, string& phone)
 	stat = mysql_query(Connptr, query.c_str());
 	if (stat != 0) {
 		fprintf(stderr, "mysql query error: %s\n", mysql_error(&Conn));
-		exit(0);
+		exit(100);
 	}
 	Result = mysql_store_result(Connptr);
 	while ((Row = mysql_fetch_row(Result)) != NULL) {
@@ -193,7 +193,7 @@ int order_payment(MYSQL* Connptr, MYSQL &Conn, MYSQL_RES* Result, string& phone)
 	stat = mysql_query(Connptr, query.c_str());
 	if (stat != 0) {
 		fprintf(stderr, "mysql query error: %s\n", mysql_error(&Conn));
-		exit(0);
+		exit(100);
 	}
 	printf("\n결제하실 금액은 총 %d원입니다\n", sum);
 	return sum;
@@ -264,7 +264,7 @@ void order(MYSQL* Connptr, MYSQL &Conn, MYSQL_RES* Result) {
 			int stat = mysql_query(Connptr, query.c_str());
 			if (stat != 0) {
 				fprintf(stderr, "mysql query error: %s\n", mysql_error(&Conn));
-				exit(0);
+				exit(100);
 			}
 			bool check = false, sign_up = false;
 			Result = mysql_store_result(Connptr);
@@ -285,7 +285,7 @@ void order(MYSQL* Connptr, MYSQL &Conn, MYSQL_RES* Result) {
 				stat = mysql_query(Connptr, query.c_str());
 				if (stat != 0) {
 					fprintf(stderr, "mysql query error: %s\n", mysql_error(&Conn));
-					exit(0);
+					exit(100);
 				}
 				check = true;
 				if (sign == "Y")
@@ -305,7 +305,7 @@ void order(MYSQL* Connptr, MYSQL &Conn, MYSQL_RES* Result) {
 						stat = mysql_query(Connptr, query.c_str());
 						if (stat != 0) {
 							fprintf(stderr, "mysql query error: %s\n", mysql_error(&Conn));
-							exit(0);
+							exit(100);
 						}
 						cout << "\n"<<sum * 0.05 << "원 만큼 적립되셨습니다." << "\n\n";
 						printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
@@ -322,7 +322,7 @@ void order(MYSQL* Connptr, MYSQL &Conn, MYSQL_RES* Result) {
 							stat = mysql_query(Connptr, query.c_str());
 							if (stat != 0) {
 								fprintf(stderr, "mysql query error: %s\n", mysql_error(&Conn));
-								exit(0);
+								exit(100);
 							}
 							continue;
 						}
@@ -406,7 +406,7 @@ void managing(MYSQL* Connptr, MYSQL &Conn, MYSQL_RES* Result) {
 			stat = mysql_query(Connptr, query.c_str());
 			if (stat != 0) {
 				fprintf(stderr, "mysql query error: %s\n", mysql_error(&Conn));
-				exit(0);
+				exit(100);
 			}
 		}
 		else if (command == "메뉴 삭제") {
@@ -417,7 +417,7 @@ void managing(MYSQL* Connptr, MYSQL &Conn, MYSQL_RES* Result) {
 			stat = mysql_query(Connptr, query.c_str());
 			if (stat != 0) {
 				fprintf(stderr, "mysql query error: %s\n", mysql_error(&Conn));
-				exit(0);
+				exit(100);
 			}
 			printf("\n요청하신 메뉴가 삭제되었습니다.\n");
 		}
@@ -433,7 +433,7 @@ void managing(MYSQL* Connptr, MYSQL &Conn, MYSQL_RES* Result) {
 			stat = mysql_query(Connptr, query.c_str());
 			if (stat != 0) {
 				fprintf(stderr, "mysql query error: %s\n", mysql_error(&Conn));
-				exit(0);
+				exit(100);
 			}
 			printf("\n요청하신 메뉴 재고가 채워졌습니다.\n");
 		}
@@ -442,11 +442,12 @@ void managing(MYSQL* Connptr, MYSQL &Conn, MYSQL_RES* Result) {
 			int rev_sum=0;
 			printf("\n정산할 날짜를 입력하시오,\n >>");
 			getline(cin, rev_date);
-			query = "select sum(payment) from order_payment group by o_date having o_date ='" + rev_date + "'";
+			//NVL함수 없으므로 ifnull씀
+			query = "select ifnull(sum(payment),0) from order_payment group by o_date having o_date ='" + rev_date + "'";
 			stat = mysql_query(Connptr, query.c_str());
 			if (stat != 0) {
 				fprintf(stderr, "mysql query error: %s\n", mysql_error(&Conn));
-				exit(0);
+				exit(100);
 			}
 			Result = mysql_store_result(Connptr);
 			while ((Row = mysql_fetch_row(Result)) != NULL) {
@@ -460,7 +461,7 @@ void managing(MYSQL* Connptr, MYSQL &Conn, MYSQL_RES* Result) {
 			stat = mysql_query(Connptr, query.c_str());
 			if (stat != 0) {
 				fprintf(stderr, "mysql query error: %s\n", mysql_error(&Conn));
-				exit(0);
+				exit(100);
 			}
 			cout << rev_date << "의 정산을 완료했습니다. \n";
 			//정산과 동시에 주문 내역 삭제
@@ -468,26 +469,26 @@ void managing(MYSQL* Connptr, MYSQL &Conn, MYSQL_RES* Result) {
 			stat = mysql_query(Connptr, query.c_str());
 			if (stat != 0) {
 				fprintf(stderr, "mysql query error: %s\n", mysql_error(&Conn));
-				exit(0);
+				exit(100);
 			}
 			query = "delete from order_payment";
 			stat = mysql_query(Connptr, query.c_str());
 			if (stat != 0) {
 				fprintf(stderr, "mysql query error: %s\n", mysql_error(&Conn));
-				exit(0);
+				exit(100);
 			}
 			
 		}
 		else if(command == "종료하기") {
 			printf("\n프로그램을 종료합니다.\n");
-			exit(0);
+			exit(100);
 		}
 		else if (command == "날짜 별 수익") {
 			query = "select rev_date, revenue from calculation ";
 			stat = mysql_query(Connptr, query.c_str());
 			if (stat != 0) {
 				fprintf(stderr, "mysql query error: %s\n", mysql_error(&Conn));
-				exit(0);
+				exit(100);
 			}
 			Result = mysql_store_result(Connptr);
 			printf("+------------+---------+\n");
