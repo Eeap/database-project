@@ -481,7 +481,7 @@ void managing(MYSQL* Connptr, MYSQL &Conn, MYSQL_RES* Result) {
 		}
 		else if(command == "종료하기") {
 			printf("\n프로그램을 종료합니다.\n");
-			exit(100);
+			exit(0);
 		}
 		else if (command == "날짜 별 수익") {
 			query = "select rev_date, revenue from calculation ";
